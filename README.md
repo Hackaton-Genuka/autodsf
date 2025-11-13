@@ -1,59 +1,229 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# README.md - AutoDSF 🚀
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+**Automatisation de la Déclaration Statistique et Fiscale pour PME**
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 📋 Description
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+AutoDSF est une application web moderne qui automatise la préparation, le calcul et la soumission de la Déclaration Statistique et Fiscale (DSF) pour les petites et moyennes entreprises. Elle intègre un audit intelligent détectant les risques fiscaux et garantit une archivage sécurisé des déclarations.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+**MVP en cours** : Version 1.0 ciblant la génération automatisée depuis fichiers Excel (API Genuka en préparation).
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+## ✨ Fonctionnalités clés
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- ✅ **Multi-entreprises** : Gestion centralisée pour comptables et conseillers
+- 📊 **Import** : Upload Excel ou synchronisation ERP (Genuka, Odoo, QuickBooks)
+- 🧮 **Calcul automatique** : Produits, charges, TVA, résultat fiscal
+- 🔍 **Audit intelligent** : Détection d'incohérences et anomalies fiscales
+- 📄 **Génération PDF** : Déclaration au format réglementaire certifié
+- 🔒 **Archivage sécurisé** : Historique complet avec traçabilité (audit trail)
+- 🔔 **Notifications** : Relances échéances, anomalies détectées, statuts
+- 👥 **Rôles utilisateurs** : Administrateur, comptable, consultant externe
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## 🛠️ Stack Technique
 
-### Premium Partners
+| Composant | Technologie |
+|-----------|-------------|
+| **Backend** | PHP 8.3 + Laravel 12 |
+| **Frontend** | React 18 + Inertia.js (Breeze) + TailwindCSS |
+| **Base de données** | MySQL 8.0+ ou PostgreSQL 15+ |
+| **API** | Laravel HTTP Client (pour Genuka) |
+| **Génération PDF** | DomPDF |
+| **Files** | Laravel Excel (Maatwebsite) |
+| **Notifications** | Laravel Mail + SMS (Twilio) |
+| **Activity Log** | Spatie Laravel Activity Log |
+| **Queue** | Redis ou database driver |
+| **Tests** | PHPUnit + Pest |
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+---
 
-## Contributing
+## 📋 Prérequis
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- PHP ≥ 8.3 avec extensions : `mbstring`, `xml`, `zip`, `gd`, `pdo_mysql`
+- Composer ≥ 2.5
+- Node.js ≥ 20.x + npm
+- MySQL ≥ 8.0 ou PostgreSQL ≥ 15
+- Redis (optionnel, pour les queues)
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## 🚀 Installation
 
-## Security Vulnerabilities
+```bash
+# 1. Cloner et installer les dépendances
+composer create-project laravel/laravel AutoDSF
+cd AutoDSF
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+# 2. Installer Laravel Breeze avec React
+composer require laravel/breeze --dev
+php artisan breeze:install react
+npm install
 
-## License
+# 3. Configurer la base de données
+cp .env.example .env
+# Éditer .env (voir section Configuration ci-dessous)
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+# 4. Lancer les migrations
+php artisan migrate
+
+# 5. Lancer le serveur de développement
+npm run dev
+php artisan serve
+```
+
+---
+
+## ⚙️ Configuration du fichier `.env`
+
+```dotenv
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=autodsf
+DB_USERNAME=root
+DB_PASSWORD=
+
+# Mail (pour les notifications)
+MAIL_MAILER=smtp
+MAIL_HOST=mailpit
+MAIL_PORT=1025
+
+# Queue (décommenter si Redis)
+# QUEUE_CONNECTION=redis
+
+# Genuka API (laisser vide pour l'instant, utilisera le mock)
+GENUKA_BASE_URL=
+GENUKA_API_KEY=
+```
+
+**Créer la base de données** :
+```sql
+CREATE DATABASE autodsf CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+```
+
+---
+
+## 📁 Structure des dossiers (modulaire)
+
+```
+app/
+├── Modules/
+│   ├── Core/          # Modèles Company, UserRole
+│   ├── DSF/           # Calcul, génération, déclarations
+│   ├── Audit/         # Règles, résultats d'audit
+│   ├── Import/        # Upload Excel, intégration ERP
+│   ├── Notification/  # Classes de notification
+│   └── Reporting/     # Rapports de performance fiscale
+├── Services/
+│   ├── GenukaMock/        # Mock API Genuka
+│   └── PDFGenerator/      # Service génération PDF
+├── Http/
+│   ├── Middleware/        # RequireCompanyAccess
+│   └── Controllers/API/   # Routes API protégées
+database/
+├── factories/         # Factories pour tests
+│   ├── DSF/
+│   └── Audit/
+└── seeders/           # RoleSeeder, AuditRuleSeeder
+resources/js/
+├── Pages/             # Composants React par module
+│   ├── Dashboard.jsx
+│   ├── Import/
+│   ├── DSF/
+│   └── Audit/
+└── Components/        # CompanySelector, NotificationBell
+```
+
+---
+
+## 🔧 Commandes Artisan essentielles
+
+```bash
+# Générer une déclaration pour une entreprise
+php artisan dsf:calculate {company_id} {year}
+
+# Lancer les workers de queue (en dev, dans un terminal séparé)
+php artisan queue:work
+
+# Vider le cache après modification des règles
+php artisan cache:clear
+
+# Lancer les tests
+php artisan test --filter=DSFCalculation
+
+# Créer un admin (à implémenter)
+php artisan autodsf:create-admin
+```
+
+---
+
+## 🗺️ Roadmap des modules
+
+| Sprint | Module | Durée | Description |
+|--------|--------|-------|-------------|
+| **1** | **Fondations & Auth** | 3 jours | Multi-entreprises, rôles, middleware |
+| **2** | **Import données** | 5 jours | Upload Excel + mock API Genuka |
+| **3** | **Moteur DSF** | 4 jours | Calcul des indicateurs fiscaux |
+| **4** | **Système d'audit** | 5 jours | Détection anomalies + notifications |
+| **5** | **Génération PDF** | 4 jours | Template PDF + archivage |
+| **6** | **Notifications** | 3 jours | Email, SMS, journal d'activité |
+| **7** | **Frontend React** | 7 jours | Dashboard, UI, responsive design |
+| **8** | **Tests & Docs** | 2 jours | Tests unitaires + doc API |
+
+---
+
+## 🎮 Lancement en développement
+
+**Terminal 1** (Frontend) :
+```bash
+npm run dev
+```
+
+**Terminal 2** (Backend) :
+```bash
+php artisan serve
+```
+
+**Terminal 3** (Queues) :
+```bash
+php artisan queue:work
+```
+
+**Mailpit** (pour catcher les emails) :
+```bash
+docker run -d -p 1025:1025 -p 8025:8025 axllent/mailpit
+# Consulter les emails à http://localhost:8025
+```
+
+---
+
+## 📚 Documentation complémentaire
+
+- [Guide d'installation détaillé](docs/INSTALL.md)
+- [Documentation API](docs/API.md)
+- [Règles de calcul DSF](docs/REGLES_DSF.md)
+- [Seeding de données de test](docs/SEEDING.md)
+
+---
+
+## 🤝 Contribution
+
+1. Créer une branche `feature/nom-du-module`
+2. Commiter avec messages clairs : `feat: ajoute calcul TVA #3`
+3. Pousser et créer une Pull Request
+4. S'assurer que les tests passent : `php artisan test`
+
+---
+
+## 📄 Licence
+
+MIT License - Voir le fichier `LICENSE` pour plus de détails.
+
+---
+
+**Made with ❤️ pour simplifier la vie des PME et des experts-comptables**
